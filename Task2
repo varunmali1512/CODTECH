@@ -1,0 +1,81 @@
+#include <iostream>
+using namespace std;
+
+// Function to convert Celsius to Fahrenheit
+double celsiusToFahrenheit(double celsius) {
+    return (celsius * 9 / 5) + 32;
+}
+
+// Function to convert Celsius to Kelvin
+double celsiusToKelvin(double celsius) {
+    return celsius + 273.15;
+}
+
+// Function to convert Fahrenheit to Celsius
+double fahrenheitToCelsius(double fahrenheit) {
+    return (fahrenheit - 32) * 5 / 9;
+}
+
+// Function to convert Fahrenheit to Kelvin
+double fahrenheitToKelvin(double fahrenheit) {
+    return fahrenheitToCelsius(fahrenheit) + 273.15;
+}
+
+// Function to convert Kelvin to Celsius
+double kelvinToCelsius(double kelvin) {
+    return kelvin - 273.15;
+}
+
+// Function to convert Kelvin to Fahrenheit
+double kelvinToFahrenheit(double kelvin) {
+    return celsiusToFahrenheit(kelvinToCelsius(kelvin));
+}
+
+int main() {
+    double temperature;
+    int inputScale, outputScale;
+
+    cout << "Temperature Conversion Program\n";
+    cout << "Enter the temperature: ";
+    cin >> temperature;
+
+    cout << "Select the input scale:\n";
+    cout << "1. Celsius\n2. Fahrenheit\n3. Kelvin\n";
+    cout << "Enter your choice (1/2/3): ";
+    cin >> inputScale;
+
+    cout << "Select the output scale:\n";
+    cout << "1. Celsius\n2. Fahrenheit\n3. Kelvin\n";
+    cout << "Enter your choice (1/2/3): ";
+    cin >> outputScale;
+
+    double convertedTemperature = temperature;
+
+    if (inputScale == 1) { // Celsius
+        if (outputScale == 2)
+            convertedTemperature = celsiusToFahrenheit(temperature);
+        else if (outputScale == 3)
+            convertedTemperature = celsiusToKelvin(temperature);
+    } else if (inputScale == 2) { // Fahrenheit
+        if (outputScale == 1)
+            convertedTemperature = fahrenheitToCelsius(temperature);
+        else if (outputScale == 3)
+            convertedTemperature = fahrenheitToKelvin(temperature);
+    } else if (inputScale == 3) { // Kelvin
+        if (outputScale == 1)
+            convertedTemperature = kelvinToCelsius(temperature);
+        else if (outputScale == 2)
+            convertedTemperature = kelvinToFahrenheit(temperature);
+    } else {
+        cout << "Invalid input scale selected.\n";
+        return 1;
+    }
+
+    if (outputScale < 1 || outputScale > 3) {
+        cout << "Invalid output scale selected.\n";
+        return 1;
+    }
+
+    cout << "Converted Temperature: " << convertedTemperature << endl;
+    return 0;
+}
